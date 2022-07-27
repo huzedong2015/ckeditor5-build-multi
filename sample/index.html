@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CKEditor 5 – classic editor build – development sample</title>
+	<style>
+		body {
+			max-width: 800px;
+			margin: 20px auto;
+		}
+	</style>
+</head>
+<body>
+
+<h1>CKEditor 5 – classic editor build – development sample</h1>
+
+<div id="snippet-multiroot-editor">
+    <div id="toolbar"></div>
+
+    <header id="header" placeholder="xx">
+        Header content is inserted here.
+    </header>
+
+    <div id="content">
+        Editor content is inserted here.
+    </div>
+
+    <div id="footer-left">
+        Editor content is inserted here.
+    </div>
+
+    <div id="footer-right">
+        Editor content is inserted here.
+    </div>
+</div>
+
+
+<script src="../build/ckeditor.js"></script>
+<script>
+	ClassicEditor
+    .create( {
+        header: document.querySelector( '#header' ),
+        content: document.querySelector( '#content' ),
+        footerleft: document.querySelector( '#footer-left' ),
+        footerright: document.querySelector( '#footer-right' )
+    }, {
+        placeholder: {
+            header: 'Header text goes here',
+            content: 'Type content here',
+            footerleft: 'Left footer content',
+            footerright: 'Right footer content'
+        },
+    } )
+    .then( newEditor => {
+        document.querySelector( '#toolbar' ).appendChild( newEditor.ui.view.toolbar.element );
+
+        window.editor = newEditor;
+    } )
+    .catch( err => {
+        console.error( err.stack );
+    } );
+	// ClassicEditor.create( document.querySelector( '#editor' ) )
+	// 	.then( editor => {
+	// 		window.editor = editor;
+	// 	} )
+	// 	.catch( error => {
+	// 		console.error( 'There was a problem initializing the editor.', error );
+	// 	} );
+</script>
+
+</body>
+</html>

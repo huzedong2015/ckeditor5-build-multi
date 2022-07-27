@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CKEditor 5 – classic editor build – development sample</title>
+	<style>
+		body {
+			max-width: 800px;
+			margin: 20px auto;
+		}
+	</style>
+</head>
+<body>
+
+<h1>CKEditor 5 – classic editor build – development sample</h1>
+
+<div id="snippet-multiroot-editor">
+    <div id="toolbar"></div>
+
+    <div class="ck-editor-content" data-id="1" placeholder="xx">
+        Header content is inserted here.
+    </div>
+
+    <div class="ck-editor-content" data-id="2">
+        Editor content is inserted here.
+    </div>
+
+    <div class="ck-editor-content" data-id="3">
+        Editor content is inserted here.
+    </div>
+
+    <div class="ck-editor-content" data-id="4">
+        Editor content is inserted here.
+    </div>
+</div>
+
+
+<script src="ckeditor.js"></script>
+<script>
+    const editotElements = [...document.querySelectorAll(".ck-editor-content")];
+
+	ClassicEditor
+    .create(editotElements, {
+        placeholder: "111",
+        autosave: {
+			// save( editor ) {
+			// 	// The saveData() function must return a promise
+			// 	// which should be resolved when the data is successfully saved.
+			// 	console.log(editor);
+			// }
+		}
+    } )
+    .then( editor => {
+        document.querySelector( '#toolbar' ).appendChild( editor.ui.view.toolbar.element );
+
+        /** 编辑器数据变化 */
+        editor.model.document.on("change:data", (evt, name, focusedElement) => {
+            editotElements.forEach((el) => {
+                console.log(editor.getData({ rootName: el.dataset.id }));
+            });
+        });
+    } )
+</script>
+
+</body>
+</html>
